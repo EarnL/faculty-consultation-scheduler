@@ -1,6 +1,6 @@
 # Render + Netlify deployment status
 
-The user selected Netlify for the frontend, Render for the Express backend, and a free persistent PostgreSQL service such as Neon for storage. No public deployment has occurred. No hosting IDs, production URLs or database credentials are configured in this checkout.
+The user selected Netlify for the frontend, Render for the Express backend, and Neon for persistent PostgreSQL storage. Source is pushed to https://github.com/EarnL/faculty-consultation-scheduler on main. A Free Netlify project named `earnl-it-consultation` has been created and linked locally; its intended frontend origin is https://earnl-it-consultation.netlify.app . No frontend version has been published, and no Render backend or Neon database has been provisioned. Netlify authorization was verified. Render and Neon tools are not exposed in the current session, despite earlier UI connections; their deployment access still needs to be restored or provided through supported CLI authentication. Credentials remain outside the repository.
 
 ## Completed preparation
 
