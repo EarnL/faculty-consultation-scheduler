@@ -1,0 +1,35 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const {spawn,spawnSync}=require('node:child_process');
+const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
+const net=require('node:net');
+const Database=require('better-sqlite3');
+test('production deployment serves install assets, indexes only the landing page, and uses secure proxy sessions',async t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'portal-deployment-'));
+  const port=await new Promise(resolve=>{const server=net.createServer();server.listen(0,'127.0.0.1',()=>{const p=server.address().port;server.close(()=>resolve(p));});});
+  const env={...process.env,NODE_ENV:'production',SEED_DEMO:'false',PORT:String(port),DB_PATH:path.join(directory,'app.db'),SESSION_DB_PATH:path.join(directory,'sessions.db'),BACKUP_DIR:path.join(directory,'backups'),SESSION_SECRET:'deployment-test-secret-at-least-32-characters',PUBLIC_URL:'https://portal.example',TRUST_PROXY:'1'};
+  const cwd=path.resolve(__dirname,'..');
+  const child=spawn(process.execPath,['server.js'],{cwd,env,stdio:['ignore','pipe','pipe']});let logs='';child.stderr.on('data',b=>logs+=b);
+  t.after(async()=>{if(child.exitCode===null){child.kill();await new Promise(resolve=>child.once('exit',resolve));}fs.rmSync(directory,{recursive:true,force:true});});
+  const base=`http://127.0.0.1:${port}`;
+  let ready=false;for(let i=0;i<100;i++){try{ready=(await fetch(base+'/healthz')).ok;if(ready)break;}catch{}if(child.exitCode!==null)break;await new Promise(resolve=>setTimeout(resolve,100));}
+  assert.ok(ready,logs);
+  const db=new Database(env.DB_PATH,{readonly:true});assert.equal(db.prepare('SELECT COUNT(*) n FROM users').get().n,0);db.close();
+  const page=await fetch(base);assert.equal(page.headers.get('cache-control'),'no-cache');assert.match(await page.text(),/rel="manifest"/);
+  const manifest=await fetch(base+'/manifest.webmanifest');assert.match(manifest.headers.get('content-type'),/manifest\+json/);assert.equal((await manifest.json()).display,'standalone');
+  for(const asset of ['/sw.js','/offline.html','/css/mobile.css','/js/pwa.js','/images/app-icon-192.png','/images/app-icon-512.png']) assert.equal((await fetch(base+asset)).status,200,asset);
+  assert.equal((await fetch(base+'/sw.js')).headers.get('cache-control'),'no-cache');
+  assert.match(await (await fetch(base+'/robots.txt')).text(),/Sitemap: https:\/\/portal.example\/sitemap.xml/);
+  const sitemap=await (await fetch(base+'/sitemap.xml')).text();assert.match(sitemap,/<loc>https:\/\/portal.example\/<\/loc>/);assert.equal(sitemap.includes('/api/'),false);
+  assert.match((await fetch(base+'/api/me')).headers.get('x-robots-tag'),/noindex/);
+  const headers={'content-type':'application/json','x-forwarded-proto':'https',origin:`https://127.0.0.1:${port}`};
+  const body=JSON.stringify({student_id:'2026-TEST01',name:'Deployment Test',course:'BSIT-1A',password:'strong-test-password'});
+  const registered=await fetch(base+'/api/register',{method:'POST',headers,body});assert.equal(registered.status,201,await registered.clone().text());assert.match(registered.headers.get('set-cookie'),/; Secure/);
+  const throughFrontend=await fetch(base+'/api/register',{method:'POST',headers:{...headers,origin:'https://portal.example'},body:JSON.stringify({student_id:'2026-PROXY01',name:'Proxy Student',course:'BSIT-1A',password:'strong-test-password'})});
+  assert.equal(throughFrontend.status,201,await throughFrontend.clone().text());assert.match(throughFrontend.headers.get('set-cookie'),/; Secure/);assert.match(throughFrontend.headers.get('set-cookie'),/SameSite=Lax/);
+  assert.equal(throughFrontend.headers.has('access-control-allow-origin'),false);
+  const rejected=await fetch(base+'/api/register',{method:'POST',headers:{...headers,origin:'https://other.example'},body});assert.equal(rejected.status,403);
+  const unsafe=spawnSync(process.execPath,['server.js'],{cwd,env:{...env,SESSION_SECRET:''},encoding:'utf8'});assert.notEqual(unsafe.status,0);assert.match(unsafe.stderr,/Production requires/);
+});

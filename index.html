@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Consultation Hour Scheduler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/lucide@0.382.0"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ==== Toast container ==== -->
+  <div id="toast"></div>
+
+  <!-- ==== Login Page ==== -->
+  <section id="login-page" class="page">
+    <div class="login-card">
+      <h1>Dalubhasaan ng Lungsod ng Lucena</h1>
+      <p class="sub">Faculty Consultation Hour Scheduler</p>
+
+      <div class="role-toggle">
+        <button data-role="student" class="active">Student</button>
+        <button data-role="faculty">Faculty</button>
+      </div>
+
+      <form id="login-form">
+        <label for="login-email">Email / Username</label>
+        <input id="login-email" type="email" required placeholder="you@dll.edu.ph">
+
+        <label for="login-pwd">Password</label>
+        <div class="pwd-wrapper">
+          <input id="login-pwd" type="password" required placeholder="••••••••">
+          <button type="button" id="toggle-pwd" aria-label="Show password"><i data-lucide="eye"></i></button>
+        </div>
+
+        <div class="remember">
+          <input id="remember-me" type="checkbox">
+          <label for="remember-me">Remember me</label>
+        </div>
+
+        <button type="submit" class="btn-primary" id="login-btn">
+          <span>Login</span>
+          <i data-lucide="loader" class="spinner hidden"></i>
+        </button>
+
+        <p class="demo-info">
+          Demo accounts:
+          <br>Student – <code>student@dll.edu.ph / 123456</code>
+          <br>Faculty – <code>faculty@dll.edu.ph / 123456</code>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==== Main App Layout ==== -->
+  <div id="app" class="hidden">
+    <aside id="sidebar">
+      <div class="brand">
+        <i data-lucide="calendar"></i>
+        <span>DLL Scheduler</span>
+      </div>
+      <nav id="nav-links"></nav>
+      <button id="collapse-sidebar" aria-label="Collapse sidebar"><i data-lucide="chevron-left"></i></button>
+    </aside>
+
+    <main id="main-content">
+      <!-- Pages will be injected here -->
+    </main>
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>

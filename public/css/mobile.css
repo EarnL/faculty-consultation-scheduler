@@ -1,0 +1,41 @@
+/* Phone layouts and installed-app safe areas. Loaded after component styles. */
+html{-webkit-text-size-adjust:100%;scroll-padding-top:100px}
+body{min-width:320px}
+img,video,canvas{max-width:100%}
+#main-content,#page-content,.card{min-width:0}
+.install-app-launcher{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right));z-index:95;min-height:44px;padding:10px 17px;border:1px solid #cbded5;border-radius:24px;background:#fff;color:#07543d;font:600 13px Inter,system-ui,sans-serif;box-shadow:0 4px 20px #153d3320;cursor:pointer}
+.install-app-launcher[hidden]{display:none}
+.install-app-dialog{box-sizing:border-box;width:calc(100% - 32px);max-width:440px;max-height:calc(100dvh - 48px);overflow:auto;margin:auto;padding:28px;border:1px solid #dce6e0;border-radius:20px;color:#183348;background:#fff;box-shadow:0 20px 70px #102c3330;font:14px/1.65 Inter,system-ui,sans-serif}
+.install-app-dialog::backdrop{background:#0a192c70;backdrop-filter:blur(3px)}
+.install-app-dialog h2{font-size:21px;line-height:1.35;margin:14px 0 10px}.install-app-dialog p{margin:10px 0 18px;color:#607387}.install-app-dialog strong{color:#244838}.install-app-dialog small{color:#607387}.install-app-dialog .btn{min-height:44px}.install-online-note{font-size:12px;border-top:1px solid #e3eae7;padding-top:14px}.install-app-launcher:focus-visible{outline:3px solid #449b78;outline-offset:3px}
+@media(max-width:900px){
+  #mobile-header{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));top:0;padding-top:env(safe-area-inset-top);height:calc(var(--header-h) + env(safe-area-inset-top))}
+  #main-content{padding-top:calc(var(--header-h) + env(safe-area-inset-top) + 20px);padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  #sidebar{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);height:100dvh}
+  .table-wrapper{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:600px){
+  input,select,textarea{font-size:16px!important} /* Avoid iOS input-focus zoom. */
+  .btn,.btn-sm,.wf-row-actions select{min-height:44px}
+  .page-header{gap:14px;flex-wrap:wrap}.page-header h1{font-size:24px;overflow-wrap:anywhere}
+  .page-header>.btn,.wf-header-actions{width:100%}.wf-header-actions{display:flex;flex-wrap:wrap}.wf-header-actions .btn{flex:1}
+  .form-row{display:flex;flex-direction:column;gap:0}.form-row>*{width:100%;min-width:0}
+  .wf-toolbar,.wf-filters,.account-toolbar{flex-wrap:wrap;gap:10px}
+  .wf-toolbar>*,.wf-filters>*,.account-toolbar>*{min-width:0;max-width:100%;flex:1 1 145px}
+  .wf-toolbar input[type=search],.account-toolbar .account-search{flex-basis:100%;width:100%}
+  .wf-table{min-width:0!important;width:100%}.wf-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .wf-table tbody{display:grid;padding:12px;gap:12px}.wf-table tr{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--border);border-radius:12px;padding:14px;background:#fff}
+  .wf-table td{display:block;padding:7px 0;border:0;white-space:normal!important;overflow-wrap:anywhere;max-width:100%}
+  .wf-table td:first-child{padding-top:0}.wf-table td:first-child strong{font-size:15px}.wf-table td>strong{white-space:normal}.wf-table td:last-child{padding-top:12px;border-top:1px solid var(--border);margin-top:7px}
+  .wf-row-actions{display:flex;flex-wrap:wrap;gap:8px}.wf-row-actions .btn,.wf-row-actions select{flex:1;min-width:110px}
+  #modal-overlay{padding:10px;padding-top:max(10px,env(safe-area-inset-top));padding-bottom:max(10px,env(safe-area-inset-bottom))}
+  #modal-box{width:100%;max-width:100%;max-height:calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));border-radius:16px}
+  #modal-header,#modal-body,#modal-footer{padding:16px}#modal-body{overscroll-behavior:contain}#modal-close{min-width:44px;min-height:44px;flex-shrink:0}
+  #modal-footer{display:flex;flex-wrap:wrap;gap:8px}#modal-footer .btn{flex:1}
+  .pass-brand{gap:10px}.pass-brand strong{font-size:16px}.pass-details{padding:14px}.pass-qr{padding:18px 8px}.pass-qr img,.pass-qr canvas{max-width:100%;height:auto!important}
+  .landing-navbar{padding-left:16px;padding-right:16px;gap:10px;flex-wrap:wrap}
+  .header-context{min-width:0}.portal-header-left{min-width:0;flex:1}.header-context strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}.portal-header-right{flex-shrink:0}
+}
+@media(max-width:380px){#main-content{padding-left:12px;padding-right:12px}.header-context>span{display:none}.header-context strong{max-width:34vw}.install-app-dialog{padding:22px}}
+@media(display-mode:standalone){.install-app-launcher{display:none}}
+@media print{.install-app-launcher,.install-app-dialog{display:none!important}}

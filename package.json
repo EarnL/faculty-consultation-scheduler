@@ -1,0 +1,28 @@
+{
+  "name": "dll-consultation-scheduler",
+  "version": "1.0.0",
+  "description": "Faculty Consultation Hour Scheduler â€“ Dalubhasaan ng Lungsod ng Lucena",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test tests/*.test.js",
+    "setup:admin": "node scripts/setup-admin.js",
+    "restore:backup": "node scripts/restore-backup.js",
+    "build:netlify": "node scripts/build-netlify.js",
+    "migrate:postgres": "node scripts/migrate-postgres.js",
+    "restore:postgres": "node scripts/restore-postgres.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.6.0",
+    "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
+    "express-session": "^1.18.0",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.6.0",
+    "jsdom": "^29.1.1"
+  }
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IT Consultation Portal | DLL</title>
+  <meta name="theme-color" content="#07543d">
+  <meta name="description" content="Connect with DLL Information Technology faculty, find consultation schedules, and manage your appointments through the IT Consultation Portal.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IT Consult">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" href="/images/it-department-logo.png?v=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/app-icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/workflows.css">
+  <link rel="stylesheet" href="/css/faculty-directory.css">
+  <link rel="stylesheet" href="/css/portal-header.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <link rel="stylesheet" href="/css/consultation-overview.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+</head>
+<body>
+
+  <!-- ═══ Toast Container ═══ -->
+  <div id="toast-container"></div>
+
+  <!-- ═══ Landing Page ═══ -->
+  <section id="landing-page">
+    <!-- Navbar -->
+    <header class="landing-navbar">
+      <div class="landing-nav-container">
+        <div class="landing-brand">
+          <img src="/images/dll-logo.png" alt="DLL Logo" class="landing-logo">
+          <div class="landing-brand-text">
+            <span class="univ-title">Dalubhasaan ng Lungsod ng Lucena</span>
+            <span class="system-sub">Faculty Consultation Hour Scheduler</span>
+          </div>
+        </div>
+        <div class="landing-nav-actions">
+          <a href="#about-section" class="landing-link">About</a>
+          <a href="#guidelines-section" class="landing-link">Guidelines</a>
+          <button class="btn btn-primary btn-sm goto-login-btn" id="landing-signin-btn" type="button">
+            <span>Sign In</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="landing-hero">
+      <div class="landing-hero-content">
+        <div class="official-tag">
+          <span class="tag-pulse"></span>
+          Official School Consultation Portal
+        </div>
+        <h1>Bridging Students and Faculty Through Structured Academic Consultation</h1>
+        <p class="hero-desc" style="margin-bottom: 0;">
+          An institutional scheduling platform designed for <strong>Dalubhasaan ng Lungsod ng Lucena (DLL)</strong> to streamline consultation appointments, optimize faculty office hours, and foster academic collaboration.
+        </p>
+      </div>
+    </div>
+
+    <!-- Brief Info / Value Pillars -->
+    <div class="landing-section" id="about-section">
+      <div class="section-badge">System Overview</div>
+      <h2 class="landing-sec-title">Standardized Academic Consultations</h2>
+      <p class="landing-sec-desc">A transparent, reliable, and convenient platform built specifically for DLL’s academic community.</p>
+
+      <div class="info-cards-grid">
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Faculty Office Hours</h3>
+          <p>View verified consultation slots per faculty member, department, and specialization without needing to visit offices in person.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Structured 15–60 Minute Slots</h3>
+          <p>Appointments are organized in dedicated intervals to prevent overlapping meetings, double bookings, and long waiting lines.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>Automated Updates</h3>
+          <p>Receive immediate alerts for appointment confirmations, faculty feedback remarks, schedule changes, or rescheduling.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Institutional Guidelines Section -->
+    <div class="landing-section bg-light" id="guidelines-section">
+      <div class="section-badge">Institutional Policy</div>
+      <h2 class="landing-sec-title">Consultation Guidelines & Ethics</h2>
+      <p class="landing-sec-desc">Important reminders for students and faculty regarding institutional consultation decorum.</p>
+
+      <div class="guidelines-grid">
+        <div class="guideline-item">
+          <div class="guide-num">01</div>
+          <div class="guide-text">
+            <h4>Institutional Account Required</h4>
+            <p>Only verified school accounts may access the system to file and approve consultations.</p>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guide-num">02</div>
+          <div class="guide-text">
+            <h4>Specify Academic Purpose</h4>
+            <p>Students must clearly state the consultation agenda (e.g. Capstone review, thesis guidance, course inquiries) upon requesting a slot.</p>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guide-num">03</div>
+          <div class="guide-text">
+            <h4>Punctuality & Decorum</h4>
+            <p>Both faculty and students are expected to adhere strictly to the booked consultation hour to respect other reserved slots.</p>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guide-num">04</div>
+          <div class="guide-text">
+            <h4>Advance Cancellation</h4>
+            <p>If unable to attend, cancel appointments at least 2 hours in advance so other students in need may book the vacated slot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+      <div class="footer-container">
+        <!-- University & Address Information -->
+        <div class="footer-left">
+          <div>
+            <strong>Dalubhasaan ng Lungsod ng Lucena</strong>
+            <p>Government Center, Lucena City, Quezon · Institutional Portal</p>
+            <div class="footer-social-link">
+              <a href="https://web.facebook.com/dll.edu.ph" target="_blank" rel="noopener noreferrer" class="footer-fb-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <span>Official Facebook Page (dll.edu.ph)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Copyright & Campus Location Button -->
+        <div class="footer-right">
+          <p>&copy; 2026 Dalubhasaan ng Lungsod ng Lucena. All rights reserved.</p>
+          <div class="footer-location-direct">
+            <a href="https://www.google.com/maps/place/Dalubhasaan+ng+Lungsod+ng+Lucena/@13.9464715,121.5896953,17z/data=!3m1!4b1!4m6!3m5!1s0x33bd4b64769fffc1:0x2e9552cc614c2e98!8m2!3d13.9464715!4d121.5896953!16s%2Fg%2F11bz_zgttw?entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-location-direction">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Campus Location & Directions</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══ Login Page ═══ -->
+  <section id="login-page" class="hidden">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <!-- Left Hero / Branding Panel for Landscape Mode -->
+        <div class="login-brand-panel">
+          <button class="back-to-landing-btn" id="back-to-landing" title="Back to Home">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Back to Portal Home</span>
+          </button>
+          <div class="brand-logo-container">
+            <img src="/images/dll-logo.png" alt="Dalubhasaan ng Lungsod ng Lucena Logo" class="brand-logo-img">
+          </div>
+          <h2>Dalubhasaan ng Lungsod ng Lucena</h2>
+          <p class="brand-tagline">Faculty Consultation Hour Scheduler</p>
+        </div>
+
+        <!-- Right Form Panel -->
+        <div class="login-form-panel">
+          <div class="form-panel-header">
+            <h3>Welcome Back</h3>
+            <p>Sign in to your consultation portal</p>
+          </div>
+
+          <div class="role-tabs" id="role-tabs">
+            <button class="role-tab active" data-role="student">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Student
+            </button>
+            <button class="role-tab" data-role="faculty">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              Faculty
+            </button>
+            <button class="role-tab" data-role="admin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-8 9-8 9s-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>Admin</button>
+          </div>
+
+          <form id="login-form" autocomplete="off">
+            <div class="form-group">
+              <label for="login-email" id="login-id-label">Student Number</label>
+              <div class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+                <input id="login-email" autocomplete="username" type="text" placeholder="Enter your student number" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <input id="login-password" autocomplete="current-password" type="password" placeholder="••••••••" required>
+                <button type="button" class="toggle-pwd" id="toggle-pwd" tabindex="-1">
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="remember-me">
+                <span>Remember me</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="login-btn">
+              <span class="btn-text">Sign In</span>
+              <span class="btn-loader hidden">
+                <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
+              </span>
+            </button>
+
+            <div class="login-error hidden" id="login-error"></div>
+          </form>
+          <div id="signup-invite" class="auth-switch"><span>New student?</span> <button type="button" id="show-register">Create an account <span aria-hidden="true">→</span></button></div>
+          <form id="register-form" class="account-form hidden">
+            <div class="signup-intro"><span class="account-eyebrow">STUDENT REGISTRATION</span><p>Your consultation journey starts here.</p></div>
+            <div class="account-form-grid">
+              <div class="field"><label for="reg-number">Student number</label><input id="reg-number" name="student_id" autocomplete="username" placeholder="e.g. 2026-00123" minlength="3" maxlength="30" pattern="[A-Za-z0-9][A-Za-z0-9\-]{2,29}" required></div>
+              <div class="field"><label for="reg-name">Full name</label><input id="reg-name" name="name" autocomplete="name" placeholder="Juan Dela Cruz" maxlength="200" required></div>
+              <div class="field"><label for="reg-course">Course / section</label><input id="reg-course" name="course" placeholder="e.g. BSIT-1A" maxlength="100" required></div>
+              <div class="field"><label for="reg-department">Department <span class="field-optional">Optional</span></label><select id="reg-department" name="department"><option value="">Select department</option></select></div>
+              <div class="field"><label for="reg-password">Password</label><input id="reg-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="At least 8 characters" required></div>
+              <div class="field"><label for="reg-confirm">Confirm password</label><input id="reg-confirm" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Re-enter your password" required></div>
+            </div>
+            <div id="register-error" class="login-error hidden" role="alert"></div>
+            <button type="submit" id="register-btn" class="btn btn-primary btn-block">Create Student Account <span aria-hidden="true">→</span></button>
+            <div class="auth-switch">Already registered? <button type="button" id="show-signin">Sign in</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ App Shell ═══ -->
+  <div id="app" class="hidden">
+
+    <!-- Mobile Header -->
+    <header id="mobile-header">
+      <button id="menu-toggle" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div style="display:flex;align-items:center;gap:0.5rem">
+        <img src="/images/dll-logo.png" alt="DLL Logo" style="width:28px;height:28px;border-radius:50%;background:#fff;padding:2px">
+        <span class="mobile-title">DLL Scheduler</span>
+      </div>
+      <button id="mobile-notif-btn" aria-label="Notifications">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-dot hidden" id="mobile-notif-dot"></span>
+      </button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-brand">
+        <img src="/images/dll-logo.png" alt="DLL Logo" style="width:34px;height:34px;border-radius:50%;background:#fff;padding:2px;box-shadow:0 2px 6px rgba(0,0,0,0.3)">
+        <span class="brand-text">DLL Scheduler</span>
+      </div>
+
+      <div class="sidebar-user" id="sidebar-user"></div>
+
+      <nav id="sidebar-nav"></nav>
+
+      <div class="sidebar-footer">
+        <button id="btn-logout" class="sidebar-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div id="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <div id="page-content"></div>
+    </main>
+  </div>
+
+  <!-- ═══ Modal Container ═══ -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal-box">
+      <div id="modal-header">
+        <h3 id="modal-title"></h3>
+        <button id="modal-close" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="modal-body"></div>
+      <div id="modal-footer"></div>
+    </div>
+  </div>
+
+  <script src="/js/qrcode.min.js"></script>
+  <script src="/js/html5-qrcode.min.js"></script>
+  <script src="/js/account-screens.js"></script>
+  <script src="/js/workflow-screens.js"></script>
+  <script src="/js/faculty-directory.js"></script>
+  <script src="/js/consultation-pass.js"></script>
+  <script src="/js/portal-header.js"></script>
+  <script src="/js/profile-screen.js"></script>
+  <script src="/js/consultation-overview.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/pwa.js"></script>
+</body>
+</html>

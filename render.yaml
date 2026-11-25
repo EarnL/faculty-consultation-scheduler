@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: dll-it-consultation-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: SEED_DEMO
+        value: "false"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATABASE_URL
+        sync: false
+      - key: PUBLIC_URL
+        sync: false

@@ -1,0 +1,16 @@
+﻿node_modules/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-*
+*.db-journal
+.session-secret
+.env
+backups/
+
+tmp/
+netlify-dist/
+.netlify/
+.env.*
+!.env.example

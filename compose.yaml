@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Set a random stable SESSION_SECRET in .env}
+      PUBLIC_URL: https://${PORTAL_DOMAIN:?Set PORTAL_DOMAIN to your public hostname in .env}
+      TRUST_PROXY: "1"
+    volumes:
+      - portal_data:/data
+    # Only Caddy can reach this port; do not publish app:3000 to the internet.
+    expose:
+      - "3000"
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      PORTAL_DOMAIN: ${PORTAL_DOMAIN:?Set PORTAL_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+volumes:
+  portal_data:
+  caddy_data:
+  caddy_config:

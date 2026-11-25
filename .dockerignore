@@ -1,0 +1,15 @@
+node_modules
+.git
+.openai
+.env
+.env.*
+.session-secret
+*.db*
+*.sqlite*
+backups
+tmp
+docs
+tests
+deployment-package.zip
+netlify-dist
+.netlify

@@ -1,0 +1,28 @@
+/* Shared navigation states across desktop and the mobile drawer. */
+#menu-toggle[hidden]{display:none!important}
+#sidebar{background:linear-gradient(180deg,#10283e 0%,#0c1d30 100%);box-shadow:6px 0 24px #10263b0a;transition:transform .26s cubic-bezier(.2,.7,.2,1)}
+.sidebar-brand{padding:18px 18px 18px 21px;gap:10px}
+.sidebar-brand .brand-text{font-size:15px;flex:1;min-width:0}
+#sidebar-dismiss{display:grid;place-items:center;flex-shrink:0;width:34px;height:36px;margin-left:auto;border:1px solid #ffffff24;border-radius:10px;color:#dbe8f1;background:#ffffff08;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+#sidebar-dismiss:hover{background:#ffffff18;border-color:#ffffff50;transform:translateX(2px)}
+.sidebar-user{margin:0 12px;padding:18px 10px;border-bottom-color:#ffffff10}
+#sidebar-nav{padding:14px 12px;scrollbar-width:thin;scrollbar-color:#45617a transparent}
+#sidebar-nav .sidebar-link{position:relative;gap:12px;width:100%;min-height:48px;margin:4px 0;padding:12px 14px;border:1px solid transparent;border-radius:11px;color:#b8c9d9;font-size:13px;font-weight:500;line-height:1.45;transition:background .18s,color .18s,border-color .18s,box-shadow .18s}
+#sidebar-nav .sidebar-link svg{width:20px;height:20px;color:#8ca6bc;transition:color .18s}
+#sidebar-nav .sidebar-link:hover{background:#ffffff0c;color:#fff;border-color:#ffffff0b}
+#sidebar-nav .sidebar-link:hover svg{color:#d9edf9}
+#sidebar-nav .sidebar-link.active{background:linear-gradient(100deg,#2e648c4d,#3c74952b);border-color:#73b3da38;color:#fff;box-shadow:0 3px 12px #0000000a}
+#sidebar-nav .sidebar-link.active::before{content:'';position:absolute;left:0;top:13px;bottom:13px;width:3px;border-radius:3px;background:#7dc9ed}
+#sidebar-nav .sidebar-link.active svg{color:#9edcf6}
+.sidebar-footer{margin:0 12px;padding:12px 0 18px;border-top-color:#ffffff12}
+.sidebar-footer .sidebar-link{min-height:46px;border:0;border-radius:10px;padding:12px 14px;font-size:13px;color:#b9cad8}
+.sidebar-footer .sidebar-link:hover{background:#ffffff0d;color:#fff}
+#sidebar button:focus-visible{outline:2px solid #a4defa;outline-offset:2px}
+#main-content{transition:margin-left .26s cubic-bezier(.2,.7,.2,1)}
+#mobile-header{transition:left .26s cubic-bezier(.2,.7,.2,1)}
+#menu-toggle{background:#f5f8fa;border-color:#dfe7ed;transition:background .18s,border-color .18s,box-shadow .18s}
+#menu-toggle:hover{background:#eaf2f7;border-color:#c0d5e2;box-shadow:0 2px 7px #163c5410}
+#sidebar-overlay{backdrop-filter:blur(3px);background:#0a192c60}
+body.navigation-drawer-open{overflow:hidden}
+@media(max-width:900px){#sidebar{width:min(310px,86vw);box-shadow:14px 0 50px #00000020}.sidebar-brand{min-height:78px}#sidebar-nav .sidebar-link{min-height:49px}#mobile-header{transition:none}}
+@media(prefers-reduced-motion:reduce){#sidebar,#main-content,#mobile-header,#sidebar-nav .sidebar-link,#sidebar-nav .sidebar-link svg,#sidebar-dismiss,#menu-toggle{transition:none}#sidebar-dismiss:hover{transform:none}}
