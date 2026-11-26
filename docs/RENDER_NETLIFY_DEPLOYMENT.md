@@ -1,6 +1,15 @@
 # Render + Netlify deployment status
 
-The user selected Netlify for the frontend, Render for the Express backend, and Neon for persistent PostgreSQL storage. Source is pushed to https://github.com/EarnL/faculty-consultation-scheduler on main. A Free Netlify project named `earnl-it-consultation` has been created and linked locally; its intended frontend origin is https://earnl-it-consultation.netlify.app . No frontend version has been published, and no Render backend or Neon database has been provisioned. Netlify authorization was verified. Render and Neon tools are not exposed in the current session, despite earlier UI connections; their deployment access still needs to be restored or provided through supported CLI authentication. Credentials remain outside the repository.
+Verified live on November 26, 2026 (Philippine time).
+
+- Public portal: https://earnl-it-consultation.netlify.app
+- Backend: https://earnl-it-consultation-api.onrender.com
+- Source: https://github.com/EarnL/faculty-consultation-scheduler (main)
+- Netlify project: earnl-it-consultation; production deploy 6b083796952c2b68e5983de4.
+- Render: Free Node service earnl-it-consultation-api in the user-confirmed My Workspace, Singapore. Initial deploy dep-dc3e2inlot8c739tgqp0 is live.
+- Neon: project rough-cloud-64438423, database consultation, PostgreSQL 18, Singapore. Verified imported totals: 14 users and 28 appointments.
+
+Known default sample passwords were replaced in the hosted copy. New sample credentials are saved privately in ignored backups/hosted-demo-credentials.json on the owner's PC. Local passwords were unchanged. No database credentials or session secrets are published in source or frontend assets.
 
 ## Completed preparation
 
@@ -12,15 +21,15 @@ The user selected Netlify for the frontend, Render for the Express backend, and 
 - PostgreSQL integration checks cover accounts, duplicate IDs, simultaneous booking, approval, private QR passes, rescheduling, compressed administrator backups, transaction rollback during restore, and session persistence/revocation. These checks were run with embedded PostgreSQL and an isolated real PostgreSQL 18 server; the user's existing PostgreSQL service was not used or altered.
 - Tests verify generated routing, absence of private source/database files in output, HTTPS session cookie settings, allowed frontend origin and unrelated-origin rejection. End-to-end Netlify proxy behavior must still be verified after both services are live.
 
-## Remaining before deployment
+## Live verification and remaining device checks
 
-1. Connect Render and Neon accounts. Authorize Netlify CLI in the owner's Netlify account. Signing into a website alone does not necessarily authorize the local CLI. Do not paste account passwords or database secrets into chat.
-2. Provision an empty Neon PostgreSQL database. Set DATABASE_URL privately in the deployment environment. For preserving the local accounts and appointments, run `npm run migrate:postgres -- --file "C:\path\to\scheduler.db"` from a trusted terminal with DATABASE_URL set. This imports a verified, consistent snapshot into an empty target only. It does not change the local database or copy login sessions. Password hashes are preserved, so replace default/sample credentials before exposing the hosted service. Never commit DATABASE_URL or place it in Netlify's frontend assets.
-3. Create/select the Netlify site first to obtain its stable hostname; do not publish an incomplete frontend. Create the Render Free service with the real persistent database connection, stable SESSION_SECRET, production mode, the Netlify origin as PUBLIC_URL and the correct HTTPS proxy policy. Keep the existing local database private until the verified import is ready. No paid Render disk or paid service has been authorized or created.
-4. Set Netlify's `RENDER_API_URL` to the verified Render service origin and `PUBLIC_URL` to the stable Netlify origin. The backend PUBLIC_URL must match exactly. Build and publish the frontend after the backend's health and authentication checks pass.
-5. Check login/logout/password revocation, faculty approval, student QR pass, file downloads, notification updates, actual phone installation and camera scanning through the public frontend origin. Confirm records and sessions survive backend restarts. Publish the confirmed public URL only after these checks pass.
+The backend HTTPS health endpoint returned 200. The frontend, web manifest, and API reverse proxy were verified over HTTPS. Student and faculty logins succeeded through the frontend origin with Secure, HttpOnly cookies. Authenticated profile, appointment, notification and faculty APIs returned 200 and no-store headers. Logout invalidated each session; anonymous profile access returned 401. Requests from an unrelated Origin were rejected with 403. This smoke test did not create appointments or change user records.
 
-Source repository configuration and host resource creation remain dependent on connected accounts. Free Render sleeps while idle, so its in-process reminder worker cannot promise timely delivery during sleep. Free tier allowances and limits still apply.
+The complete local suite previously passed 55 tests; a separate real PostgreSQL 18 network suite passed 7 tests. Actual Android/iPhone installation, camera scanning, and post-restart session persistence on the hosted service still need device/runtime verification. Installation support is included, but these physical checks have not been claimed as completed.
+
+Free Render sleeps while idle, so the first request can take longer and its in-process reminder worker cannot promise timely delivery during sleep. Hosting quotas still apply. Search engine indexing is not immediate or guaranteed.
+
+Frontend releases currently use the authorized Netlify CLI: set the public RENDER_API_URL and PUBLIC_URL build variables, run npm run build:netlify, then netlify deploy --prod --dir netlify-dist --no-build. Never deploy the project root. Backend releases use the GitHub-linked Render service; verify the resulting deploy reaches live and /healthz returns 200.
 
 ## PostgreSQL backups and recovery
 
